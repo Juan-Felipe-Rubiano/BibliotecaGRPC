@@ -1,0 +1,13 @@
+P, Cien años de soledad, 3
+R, Cien años de soledad
+P, El amor en los tiempos del cólera, 2
+R, El amor en los tiempos del cólera
+R, El amor en los tiempos del cólera
+D, El amor en los tiempos del cólera
+P, La sombra del viento, 1
+R, La sombra del viento
+D, La sombra del viento
+P, Cien años de soledad, 1
+R, Cien años de soledad
+R, Cien años de soledad
+D, Cien años de soledad

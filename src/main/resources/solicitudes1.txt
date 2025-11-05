@@ -1,0 +1,14 @@
+P, Don Quijote de la Mancha, 2
+P, Cien años de soledad, 1
+R, Don Quijote de la Mancha
+R, Don Quijote de la Mancha
+D, Don Quijote de la Mancha
+P, La sombra del viento, 2
+R, La sombra del viento
+D, Cien años de soledad
+P, Rayuela, 3
+R, Rayuela
+R, Rayuela
+R, Rayuela
+D, Rayuela
+D, La sombra del viento

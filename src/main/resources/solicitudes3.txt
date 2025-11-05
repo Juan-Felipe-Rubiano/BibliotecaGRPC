@@ -1,0 +1,12 @@
+P, Rayuela, 2
+P, Don Quijote de la Mancha, 2
+R, Rayuela
+P, Rayuela, 2
+R, Rayuela
+P, El amor en los tiempos del cólera, 4
+R, El amor en los tiempos del cólera
+R, El amor en los tiempos del cólera
+D, Rayuela
+D, El amor en los tiempos del cólera
+R, Don Quijote de la Mancha
+D, Don Quijote de la Mancha

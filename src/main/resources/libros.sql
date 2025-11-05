@@ -1,0 +1,10 @@
+insert or ignore into libros (titulo) values ('Ficciones');
+insert or ignore into libros (titulo) values ('La ciudad y los perros');
+insert or ignore into libros (titulo) values ('Pedro Páramo');
+insert or ignore into libros (titulo) values ('Rayuela');
+insert or ignore into libros (titulo) values ('Cien años de soledad');
+insert or ignore into libros (titulo) values ('Don Quijote de la Mancha');
+insert or ignore into libros (titulo) values ('El laberinto de los espíritus');
+insert or ignore into libros (titulo) values ('Crónica de una muerte anunciada');
+insert or ignore into libros (titulo) values ('La sombra del viento');
+insert or ignore into libros (titulo) values ('The Great Gatsby');

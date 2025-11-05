@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "edu.javeriana.juanfe.libreria";
+option java_outer_classname = "LibreriaProto";
+
+package libreria;
+
+message SolicitudPrestamo{
+    string titulo = 1;
+    int32 semanas = 2;
+}
+
+message SolicitudGenerica{
+  string titulo = 1;
+}
+
+message Respuesta{
+  bool exito = 1;
+  string mensaje = 2;
+}
+
+service ServicioLibreria {
+    rpc solicitarPrestamo (SolicitudPrestamo) returns (Respuesta);
+    rpc devolverPrestamo (SolicitudGenerica) returns (Respuesta);
+    rpc renovarPrestamo (SolicitudGenerica) returns (Respuesta);
+}
