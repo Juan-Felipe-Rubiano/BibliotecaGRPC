@@ -52,7 +52,7 @@ public class DbHandler {
 
     public synchronized void crearLibro(String titulo){
         if (!existeLibro(titulo)) {
-            String ddl = "INSERT INTO libros (titulo, fechaPrestamo) VALUES (?)";
+            String ddl = "INSERT INTO libros (titulo) VALUES (?)";
             try (Connection conn = DriverManager.getConnection(url);
                  PreparedStatement ps = conn.prepareStatement(ddl)) {
                 ps.setString(1, titulo);
@@ -63,14 +63,14 @@ public class DbHandler {
         }
     }
 
-    public synchronized ResultadoSolicitud prestarLibro(String titulo, int semanas) throws SQLException {
+    public synchronized ResultadoSolicitud prestarLibro(String titulo, int semanas) {
         crearLibro(titulo);
         String query = "SELECT estado FROM libros WHERE titulo = ?";
         try (Connection c = DriverManager.getConnection(url);
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setString(1, titulo);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next() && rs.getInt("estado") == 'P') {
+                if (rs.next() && "P".equals(rs.getString("estado"))) {
                     return new ResultadoSolicitud(false, "El libro ya está prestado.");
                 }
             }
@@ -90,7 +90,7 @@ public class DbHandler {
 
     public synchronized ResultadoSolicitud renovarLibro(String titulo){
         crearLibro(titulo);
-        String query = "SELECT estado, num_renovaciones, fechaPrestamo FROM libros WHERE titulo = ?";
+        String query = "SELECT estado, num_renovaciones, fecha_prestamo FROM libros WHERE titulo = ?";
         try(Connection c = DriverManager.getConnection(url);
             PreparedStatement ps = c.prepareStatement(query)) {
             ps.setString(1, titulo);
@@ -98,9 +98,9 @@ public class DbHandler {
                 if(!rs.next()){
                     return new ResultadoSolicitud(false, "El libro no existe en la BD.");
                 }
-                int prestado = rs.getInt("estado");
+                String prestado = rs.getString("estado");
                 int renovaciones = rs.getInt("num_renovaciones");
-                if(prestado == 'D'){
+                if("D".equals(prestado)){
                     return new ResultadoSolicitud(false, "El libro no está prestado.");
                 }
                 if (renovaciones >= 2) {
@@ -120,18 +120,18 @@ public class DbHandler {
         }
     }
 
-    public synchronized ResultadoSolicitud devolverLibro(String titulo) throws SQLException {
+    public synchronized ResultadoSolicitud devolverLibro(String titulo) {
         crearLibro(titulo);
         String query = "SELECT estado FROM libros WHERE titulo = ?";
         try(Connection c = DriverManager.getConnection(url);
-        PreparedStatement ps = c.prepareStatement(query)){
+            PreparedStatement ps = c.prepareStatement(query)){
             ps.setString(1, titulo);
             try(ResultSet rs = ps.executeQuery()){
                 if(!rs.next()){
                     return new ResultadoSolicitud(false, "El libro no existe en la BD.");
                 }
-                int prestado = rs.getInt("estado");
-                if(prestado == 'D'){
+                String prestado = rs.getString("estado");
+                if("D".equals(prestado)){
                     return new ResultadoSolicitud(false, "El libro no estaba prestado, no se puede devolver.");
                 }
 
@@ -145,6 +145,9 @@ public class DbHandler {
                 e.printStackTrace();
                 return new ResultadoSolicitud(false, "Error en la BD: " + e.getMessage());
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ResultadoSolicitud(false, "Error en la BD: " + e.getMessage());
         }
     }
 }

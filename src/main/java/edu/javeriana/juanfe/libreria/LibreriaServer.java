@@ -2,8 +2,10 @@ package edu.javeriana.juanfe.libreria;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -23,8 +25,13 @@ public class LibreriaServer {
         }
 
         DbHandler bd = new DbHandler(dbUrl);
-
-        String sql = Files.readString(Paths.get("src/main/resources/libros.sql"));
+        String sql;
+        try(var is = LibreriaServer.class.getResourceAsStream("/libros.sql")){
+            if(is == null){
+                throw new RuntimeException("No se encontro el archivo libros.sql en recursos.");
+            }
+            sql = new String(is.readAllBytes());
+        }
         try(Connection c = DriverManager.getConnection("jdbc:sqlite:" + dbUrl);
             Statement s = c.createStatement()){
             s.executeUpdate(sql);
@@ -34,7 +41,8 @@ public class LibreriaServer {
 
         LibreriaServiceImpl servicio = new LibreriaServiceImpl(bd);
 
-        Server server = ServerBuilder.forPort(port)
+        Server server = NettyServerBuilder
+                .forAddress(new InetSocketAddress("0.0.0.0", port))
                 .addService(servicio)
                 .build()
                 .start();
