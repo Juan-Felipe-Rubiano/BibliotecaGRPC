@@ -34,58 +34,10 @@ public class ClienteRun {
         System.out.println("127.0.0.1 => " + java.net.InetAddress.getByName("127.0.0.1"));
         System.out.println("0.0.0.0 => " + java.net.InetAddress.getByName("0.0.0.0"));
 
-        System.out.println("Nuevo jar3");
-        /*ManagedChannel channel = io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder
-                //.forAddress(new java.net.InetSocketAddress("127.0.0.1", port))
-                //.forAddress(new java.net.InetSocketAddress("10.43.102.156", port)) //direccion VM charles
-                .forAddress("10.43.102.156",port)
-                .usePlaintext()
-                .build();*/
-//        ManagedChannel channel = ManagedChannelBuilder
-//                .forAddress("10.43.102.156", port)
-//                .usePlaintext()
-//                .build();
-
-        /*NioEventLoopGroup elg = new NioEventLoopGroup();
-        ManagedChannel channel = NettyChannelBuilder
-                .forAddress("10.43.102.156",port)
-                .eventLoopGroup(elg)
-                .channelType(NioSocketChannel.class)
-                .usePlaintext()
-                .build();*/
-        /*ManagedChannel channel = ManagedChannelBuilder
-                .forTarget("dns:///10.43.102.156:50051")
-                .usePlaintext()
-                .build();*/
-//        ManagedChannel channel = ManagedChannelBuilder
-//                .forAddress("10.43.102.156", port)
-//                .usePlaintext()
-//                .build();
-        //System.setProperty("java.net.preferIPv4Addresses", "true");
-
-        /*ManagedChannel channel = NettyChannelBuilder
-                .forAddress("10.43.102.156", port)
-                .eventLoopGroup(new NioEventLoopGroup())   // fuerza NIO y no epoll
-                .channelType(NioSocketChannel.class)
-                .usePlaintext()
-                .build();
-*/
-        /*ManagedChannel channel = ManagedChannelBuilder
-                .forAddress("10.43.102.156", port)
-                .usePlaintext()
-                .build();*/
-
-//        NioEventLoopGroup elg = new NioEventLoopGroup();
-//
-//        ManagedChannel channel = NettyChannelBuilder
-//                .forAddress("10.43.102.156", port)
-//                .eventLoopGroup(elg)
-//                .channelType(NioSocketChannel.class)
-//                .usePlaintext()
-//                .build();
-
+        System.out.println("volviendo a jar anterior");
         ManagedChannel channel = io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder
-                .forAddress("10.43.102.156", port)
+                //.forAddress(new java.net.InetSocketAddress("127.0.0.1", port))
+                .forAddress(new java.net.InetSocketAddress("10.43.102.156", port)) //direccion VM charles
                 .usePlaintext()
                 .build();
 
