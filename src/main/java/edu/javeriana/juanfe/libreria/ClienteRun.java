@@ -53,10 +53,20 @@ public class ClienteRun {
                 .forTarget("dns:///10.43.102.156:50051")
                 .usePlaintext()
                 .build();*/
-        ManagedChannel channel = ManagedChannelBuilder
+//        ManagedChannel channel = ManagedChannelBuilder
+//                .forAddress("10.43.102.156", port)
+//                .usePlaintext()
+//                .build();
+        System.setProperty("java.net.preferIPv4Stack", "true");
+        System.setProperty("java.net.preferIPv4Addresses", "true");
+
+        ManagedChannel channel = NettyChannelBuilder
                 .forAddress("10.43.102.156", port)
+                .eventLoopGroup(new NioEventLoopGroup())   // fuerza NIO y no epoll
+                .channelType(NioSocketChannel.class)
                 .usePlaintext()
                 .build();
+
 
 
 
