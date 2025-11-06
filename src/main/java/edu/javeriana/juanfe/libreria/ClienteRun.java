@@ -24,7 +24,8 @@ public class ClienteRun {
         System.out.println("127.0.0.1 => " + java.net.InetAddress.getByName("127.0.0.1"));
         System.out.println("0.0.0.0 => " + java.net.InetAddress.getByName("0.0.0.0"));
 
-        System.out.println("Nuevo jar");
+        System.out.println("Nuevo jar2");
+        System.setProperty("java.net.preferIPv4Stack", "true");
         /*ManagedChannel channel = io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder
                 //.forAddress(new java.net.InetSocketAddress("127.0.0.1", port))
                 //.forAddress(new java.net.InetSocketAddress("10.43.102.156", port)) //direccion VM charles
