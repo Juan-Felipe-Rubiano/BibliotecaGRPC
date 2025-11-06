@@ -2,6 +2,8 @@ package edu.javeriana.juanfe.libreria;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
+import io.grpc.netty.shaded.io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,7 +26,7 @@ public class ClienteRun {
         System.out.println("127.0.0.1 => " + java.net.InetAddress.getByName("127.0.0.1"));
         System.out.println("0.0.0.0 => " + java.net.InetAddress.getByName("0.0.0.0"));
 
-        System.out.println("Nuevo jar2");
+        System.out.println("Nuevo jar3");
         System.setProperty("java.net.preferIPv4Stack", "true");
         /*ManagedChannel channel = io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder
                 //.forAddress(new java.net.InetSocketAddress("127.0.0.1", port))
@@ -32,8 +34,14 @@ public class ClienteRun {
                 .forAddress("10.43.102.156",port)
                 .usePlaintext()
                 .build();*/
-        ManagedChannel channel = ManagedChannelBuilder
-                .forAddress("10.43.102.156", port)
+//        ManagedChannel channel = ManagedChannelBuilder
+//                .forAddress("10.43.102.156", port)
+//                .usePlaintext()
+//                .build();
+
+        ManagedChannel channel = NettyChannelBuilder
+                .forAddress("10.43.102.156",port)
+                .channelType(NioSocketChannel.class)
                 .usePlaintext()
                 .build();
 
