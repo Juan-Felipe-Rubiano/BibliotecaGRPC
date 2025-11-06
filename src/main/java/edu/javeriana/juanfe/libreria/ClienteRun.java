@@ -12,8 +12,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class ClienteRun {
-    public static void main(String[] args) throws Exception{
+    static {
         System.setProperty("java.net.preferIPv4Stack", "true");
+    }
+
+    public static void main(String[] args) throws Exception{
+
         if(args.length < 1){
             System.out.println("Uso: java -jar cliente.jar entrada.txt [puerto]");
             return;
@@ -57,7 +61,7 @@ public class ClienteRun {
 //                .forAddress("10.43.102.156", port)
 //                .usePlaintext()
 //                .build();
-        System.setProperty("java.net.preferIPv4Addresses", "true");
+        //System.setProperty("java.net.preferIPv4Addresses", "true");
 
         /*ManagedChannel channel = NettyChannelBuilder
                 .forAddress("10.43.102.156", port)
@@ -71,15 +75,19 @@ public class ClienteRun {
                 .usePlaintext()
                 .build();*/
 
-        NioEventLoopGroup elg = new NioEventLoopGroup();
+//        NioEventLoopGroup elg = new NioEventLoopGroup();
+//
+//        ManagedChannel channel = NettyChannelBuilder
+//                .forAddress("10.43.102.156", port)
+//                .eventLoopGroup(elg)
+//                .channelType(NioSocketChannel.class)
+//                .usePlaintext()
+//                .build();
 
-        ManagedChannel channel = NettyChannelBuilder
-                .forAddress("10.43.102.156", port)
-                .eventLoopGroup(elg)
-                .channelType(NioSocketChannel.class)
+        ManagedChannel channel = ManagedChannelBuilder
+                .forAddress("10.43.102.156", 50051)
                 .usePlaintext()
                 .build();
-
 
 
         edu.javeriana.juanfe.libreria.ServicioLibreriaGrpc.ServicioLibreriaBlockingStub stub =
