@@ -50,7 +50,7 @@ public class ClienteRun {
                 .usePlaintext()
                 .build();*/
         ManagedChannel channel = ManagedChannelBuilder
-                .forTarget("dns://10.43.102.156:50051")
+                .forTarget("dns:///10.43.102.156:50051")
                 .usePlaintext()
                 .build();
 
