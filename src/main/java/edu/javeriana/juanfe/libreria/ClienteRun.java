@@ -24,7 +24,6 @@ public class ClienteRun {
         System.out.println("127.0.0.1 => " + java.net.InetAddress.getByName("127.0.0.1"));
         System.out.println("0.0.0.0 => " + java.net.InetAddress.getByName("0.0.0.0"));
 
-        // ---- AQUI USO EL NORMAL ManagedChannelBuilder ----
         ManagedChannel channel = io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder
                 .forAddress(new java.net.InetSocketAddress("127.0.0.1", port))
                 .usePlaintext()
