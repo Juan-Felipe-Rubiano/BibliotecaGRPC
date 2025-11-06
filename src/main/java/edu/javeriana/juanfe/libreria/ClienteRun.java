@@ -84,11 +84,10 @@ public class ClienteRun {
 //                .usePlaintext()
 //                .build();
 
-        ManagedChannel channel = ManagedChannelBuilder
-                .forAddress("10.43.102.156", 50051)
+        ManagedChannel channel = io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder
+                .forAddress("10.43.102.156", port)
                 .usePlaintext()
                 .build();
-
 
         edu.javeriana.juanfe.libreria.ServicioLibreriaGrpc.ServicioLibreriaBlockingStub stub =
                 edu.javeriana.juanfe.libreria.ServicioLibreriaGrpc.newBlockingStub(channel);
