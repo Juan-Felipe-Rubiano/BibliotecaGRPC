@@ -4,6 +4,9 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
 import io.grpc.netty.shaded.io.netty.channel.socket.nio.NioSocketChannel;
+import io.grpc.netty.shaded.io.netty.channel.nio.NioEventLoopGroup;
+import io.grpc.netty.shaded.io.netty.channel.socket.nio.NioSocketChannel;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -39,8 +42,10 @@ public class ClienteRun {
 //                .usePlaintext()
 //                .build();
 
+        NioEventLoopGroup elg = new NioEventLoopGroup();
         ManagedChannel channel = NettyChannelBuilder
                 .forAddress("10.43.102.156",port)
+                .eventLoopGroup(elg)
                 .channelType(NioSocketChannel.class)
                 .usePlaintext()
                 .build();
