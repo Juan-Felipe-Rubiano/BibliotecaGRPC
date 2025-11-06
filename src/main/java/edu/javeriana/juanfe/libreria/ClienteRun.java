@@ -49,10 +49,15 @@ public class ClienteRun {
                 .channelType(NioSocketChannel.class)
                 .usePlaintext()
                 .build();*/
-        ManagedChannel channel = ManagedChannelBuilder
+        /*ManagedChannel channel = ManagedChannelBuilder
                 .forTarget("dns:///10.43.102.156:50051")
                 .usePlaintext()
+                .build();*/
+        ManagedChannel channel = ManagedChannelBuilder
+                .forAddress("10.43.102.156", port)
+                .usePlaintext()
                 .build();
+
 
 
         edu.javeriana.juanfe.libreria.ServicioLibreriaGrpc.ServicioLibreriaBlockingStub stub =
