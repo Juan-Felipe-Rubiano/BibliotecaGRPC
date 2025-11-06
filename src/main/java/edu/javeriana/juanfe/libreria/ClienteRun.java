@@ -13,6 +13,7 @@ import java.io.FileReader;
 
 public class ClienteRun {
     public static void main(String[] args) throws Exception{
+        System.setProperty("java.net.preferIPv4Stack", "true");
         if(args.length < 1){
             System.out.println("Uso: java -jar cliente.jar entrada.txt [puerto]");
             return;
@@ -30,7 +31,6 @@ public class ClienteRun {
         System.out.println("0.0.0.0 => " + java.net.InetAddress.getByName("0.0.0.0"));
 
         System.out.println("Nuevo jar3");
-        System.setProperty("java.net.preferIPv4Stack", "true");
         /*ManagedChannel channel = io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder
                 //.forAddress(new java.net.InetSocketAddress("127.0.0.1", port))
                 //.forAddress(new java.net.InetSocketAddress("10.43.102.156", port)) //direccion VM charles
@@ -42,11 +42,15 @@ public class ClienteRun {
 //                .usePlaintext()
 //                .build();
 
-        NioEventLoopGroup elg = new NioEventLoopGroup();
+        /*NioEventLoopGroup elg = new NioEventLoopGroup();
         ManagedChannel channel = NettyChannelBuilder
                 .forAddress("10.43.102.156",port)
                 .eventLoopGroup(elg)
                 .channelType(NioSocketChannel.class)
+                .usePlaintext()
+                .build();*/
+        ManagedChannel channel = ManagedChannelBuilder
+                .forTarget("dns://10.43.102.156:50051")
                 .usePlaintext()
                 .build();
 
