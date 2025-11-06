@@ -25,7 +25,8 @@ public class ClienteRun {
         System.out.println("0.0.0.0 => " + java.net.InetAddress.getByName("0.0.0.0"));
 
         ManagedChannel channel = io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder
-                .forAddress(new java.net.InetSocketAddress("127.0.0.1", port))
+                //.forAddress(new java.net.InetSocketAddress("127.0.0.1", port))
+                .forAddress(new java.net.InetSocketAddress("10.43.102.156", port)) //direccion VM charles
                 .usePlaintext()
                 .build();
 
