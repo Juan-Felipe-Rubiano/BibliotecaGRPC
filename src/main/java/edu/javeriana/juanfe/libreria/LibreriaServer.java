@@ -41,11 +41,20 @@ public class LibreriaServer {
 
         LibreriaServiceImpl servicio = new LibreriaServiceImpl(bd);
 
-        Server server = NettyServerBuilder
+        /*Server server = NettyServerBuilder
                 .forAddress(new InetSocketAddress("0.0.0.0", port))
                 .addService(servicio)
                 .build()
+                .start();*/
+        System.setProperty("java.net.preferIPv4Stack", "true");
+        System.setProperty("java.net.preferIPv4Addresses", "true");
+
+        Server server = NettyServerBuilder
+                .forAddress(new InetSocketAddress("0.0.0.0", port)) // esto ya será IPv4
+                .addService(servicio)
+                .build()
                 .start();
+
 
         System.out.println("Servidor GRPC iniciado en puerto " + port + ". Con BD en " + dbUrl);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
