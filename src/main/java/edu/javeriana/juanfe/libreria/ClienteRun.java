@@ -66,8 +66,17 @@ public class ClienteRun {
                 .usePlaintext()
                 .build();
 */
-        ManagedChannel channel = ManagedChannelBuilder
+        /*ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("10.43.102.156", port)
+                .usePlaintext()
+                .build();*/
+
+        NioEventLoopGroup elg = new NioEventLoopGroup();
+
+        ManagedChannel channel = NettyChannelBuilder
+                .forAddress("10.43.102.156", port)
+                .eventLoopGroup(elg)
+                .channelType(NioSocketChannel.class)
                 .usePlaintext()
                 .build();
 
